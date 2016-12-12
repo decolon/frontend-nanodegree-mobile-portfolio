@@ -1,5 +1,7 @@
 module.exports = function(grunt) {
 
+  require('load-grunt-tasks')(grunt);
+
   // Project configuration.
   grunt.initConfig({
     uglify: {
@@ -13,6 +15,7 @@ module.exports = function(grunt) {
           cwd: '',
           src: ['js/*.js', 'views/js/*.js'],
           dest: 'dist/js',
+          ext: '.min.js'
         }],
       },
     },
@@ -27,6 +30,7 @@ module.exports = function(grunt) {
           cwd: '',
           src: ['css/*.css', 'views/css/*.css'],
           dest: 'dist/css',
+          ext: '.min.css'
         }],
       },
     },
@@ -60,24 +64,33 @@ module.exports = function(grunt) {
     },
     watch: {
       run: {
-        files: ['*.html', '**/*.{js,css}', 'views/**/*.{js,css}', 'views/*.html'],
+        files: ['*.html', 'js/*.js', 'css/*.css', 'views/css/*.css', 'views/js/*.js'],
         tasks: ['onChange'],
       },
       options: {
         livereload: true,
+        spawn: false,
       },
     },
+    // compress: {
+    //   run: {
+    //     options: {
+    //       mode: 'gzip',
+    //     },
+    //     files: [{
+    //       expand: true,
+    //       flatten: true,
+    //       cwd: 'dist/',
+    //       src: ['css/*.css'],
+    //       dest: 'dist/css',
+    //       ext: '.min.css.gzip',
+    //     }],
+    //   },
+    // },
   });
-
-  grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks('grunt-contrib-cssmin');
-  grunt.loadNpmTasks('grunt-contrib-htmlmin');
-  grunt.loadNpmTasks('grunt-contrib-imagemin');
-  grunt.loadNpmTasks('grunt-newer');
-  grunt.loadNpmTasks('grunt-contrib-watch');
 
   // Default task(s).
   grunt.registerTask('onChange', ['newer:uglify', 
-    'newer:cssmin', 'newer:htmlmin', 'newer:imagemin']);
-  grunt.registerTask('default', ['watch'])
+    'newer:cssmin', 'newer:htmlmin', 'newer:imagemin']);//, 'newer:compress']);
+  grunt.registerTask('default', ['watch']);
 };
