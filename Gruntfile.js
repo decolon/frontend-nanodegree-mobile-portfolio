@@ -62,9 +62,29 @@ module.exports = function(grunt) {
         }],
       },
     },
+    responsive_images: {
+      run: {
+        options: {
+          sizes: [{
+            name: 'small',
+            width: 320,
+          },{
+            name: 'large',
+            width: 640,
+          },{
+            name: "xl",
+            width: 1024,
+          }]
+        },
+        files: {
+          'dist/img/pizzeria.jpg': 'dist/img/pizzeria.jpg'
+        }
+      }
+    },
+    clean: ['dist/img/pizzeria.jpg'],
     watch: {
       run: {
-        files: ['*.html', 'js/*.js', 'css/*.css', 'views/css/*.css', 'views/js/*.js'],
+        files: ['*.html', 'js/*.js', 'css/*.css', 'views/*.html','views/css/*.css', 'views/js/*.js'],
         tasks: ['onChange'],
       },
       options: {
@@ -72,25 +92,10 @@ module.exports = function(grunt) {
         spawn: false,
       },
     },
-    // compress: {
-    //   run: {
-    //     options: {
-    //       mode: 'gzip',
-    //     },
-    //     files: [{
-    //       expand: true,
-    //       flatten: true,
-    //       cwd: 'dist/',
-    //       src: ['css/*.css'],
-    //       dest: 'dist/css',
-    //       ext: '.min.css.gzip',
-    //     }],
-    //   },
-    // },
   });
 
   // Default task(s).
   grunt.registerTask('onChange', ['newer:uglify', 
-    'newer:cssmin', 'newer:htmlmin', 'newer:imagemin']);//, 'newer:compress']);
+    'newer:cssmin', 'newer:htmlmin', 'imagemin', 'responsive_images', 'clean']);
   grunt.registerTask('default', ['watch']);
 };
