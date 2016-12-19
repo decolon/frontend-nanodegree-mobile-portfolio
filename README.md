@@ -5,7 +5,7 @@
 * If you don't have it, download chrome [here](https://www.google.com/chrome/browser/desktop/index.html?brand=CHBD&gclid=CjwKEAiA94nCBRDxismumrL83icSJAAeeETQ-d3MxlvL5DJA8Li-ICOASrywx0w7ySeUCc8Mz8kp_BoCmpvw_wcB)
 * Cd to the cloned repos /dist folder.
 * Execute `python -m SimpleHTTPServer`
-* Use another tab of the Terminal to go into the cloned repos /dist folder and execute `./ngrok http 8000`
+* Use another tab of the Terminal to go into the cloned repos /dist folder and execute `./ngrok http 8000` *Note*: The given version of ngrok will only work on OSX-64Bit.  To download a different version go [here](https://ngrok.com/download)
 * Copy the link from the ngrok window
 * Go to [Pagespeed Insights](https://developers.google.com/speed/pagespeed/insights/) and paste the link from the previous step
 * Press 'Analyze' to see how the site does
